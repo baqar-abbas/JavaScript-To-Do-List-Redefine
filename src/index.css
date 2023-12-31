@@ -4,6 +4,7 @@
 
 body {
   margin: 0;
+
   /* background-color: aqua; */
   background-image: url('../images/todo.jfif');
   background-size: cover;
@@ -96,7 +97,7 @@ h1 {
 }
 
 .delete-all:hover {
-  background-color: #ff0000;
+  background-color: #f00;
   color: white;
   cursor: pointer;
 }
