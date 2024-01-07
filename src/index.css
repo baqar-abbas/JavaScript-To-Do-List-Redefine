@@ -63,16 +63,27 @@ h1 {
   min-height: 27px;
   width: 105%;
   border-bottom: 1px solid wheat;
-  list-style: none;
+  list-style-type: none;
   font-size: 20px;
   padding: 13px 10px;
   left: -20px;
   position: relative;
 }
 
-.items {
+/* .items {
   margin-left: 15px;
   top: 5px;
+} */
+
+.items {
+  margin-left: 15px;
+
+  /* top: 5px; */
+  border: none;
+  font-size: 16px;
+  padding: 15px 10px;
+  height: 28px;
+  width: 300px;
 }
 
 .option {
@@ -81,10 +92,32 @@ h1 {
 
 .delete {
   display: none;
+  width: 15px;
+  height: 15px;
+}
+
+.delete:hover {
+  cursor: pointer;
+}
+
+.edit {
+  display: none;
+  width: 15px;
+  height: 15px;
+}
+
+.edit:hover {
+  cursor: pointer;
 }
 
 .select {
   display: block;
+  position: relative;
+  top: 5px;
+}
+
+.select:hover {
+  cursor: pointer;
 }
 
 .delete-all {
