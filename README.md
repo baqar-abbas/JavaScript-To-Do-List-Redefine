@@ -68,7 +68,7 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-- [Live Demo Link](Will be updated soon)
+- [Live Demo Link](https://baqar-abbas.github.io/JavaScript-To-Do-List-Redefine/dist/)
 
 <!-- GETTING STARTED -->
 
