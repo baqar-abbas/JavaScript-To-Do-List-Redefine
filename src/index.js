@@ -1,4 +1,5 @@
 import { addTask, todoItems } from './todo.js';
+import updateCompletedStatus from './status.js';
 import './index.css';
 import select2 from '../images/select.png';
 import delete2 from '../images/delete.png';
@@ -25,6 +26,7 @@ const display = () => {
   todoItems.sort((a, b) => a.index - b.index); // sort the array by index
   ul.innerHTML = ''; // clear the list before re-rendering
 
+  // Re-render the todo list
   for (let i = 0; i < todoItems.length; i += 1) {
     const node = document.createElement('li');
     node.setAttribute('class', 'todo-item editable');
@@ -43,9 +45,10 @@ const display = () => {
     // Get the selectdots, deleteoption, and editoption elements for this task
     const selectdots = node.querySelector('.select');
     const deleteoption = node.querySelector('.delete');
+    const refresh = document.querySelector('.refresh');
     const editoption = node.querySelector('.edit');
     // Get the checkbox element for this task
-    // const checkbox = node.querySelector('.checkbox');
+    const checkbox = node.querySelector('.checkbox');
 
     // Add an event listener for the selectdots
     selectdots.addEventListener('click', () => {
@@ -53,6 +56,39 @@ const display = () => {
       deleteoption.style.display = 'block';
       editoption.style.display = 'block';
     });
+
+    // Add refersh button logic
+    refresh.addEventListener('click', () => {
+      window.location.reload();
+    });
+
+    // Add a change event listener for the checkbox
+    checkbox.addEventListener('change', () => {
+      const itemKey = parseInt(node.getAttribute('data-key'), 10);
+      const itemIndex = todoItems.findIndex((item) => item.index === itemKey);
+      const completed = !!checkbox.checked;
+      updateCompletedStatus(itemIndex, completed);
+
+      // If the task is completed, add a strikethrough to the text
+      if (completed) {
+        node.querySelector('.items').style.textDecoration = 'line-through';
+      } else {
+        node.querySelector('.items').style.textDecoration = 'none';
+      }
+    });
+    // Add an event listener for the clear all completed button
+    const clearAllCompleted = () => {
+      const uncompletedTasks = todoItems.filter((item) => !item.completed);
+      todoItems.length = 0;
+      todoItems.push(...uncompletedTasks);
+      for (let i = 0; i < uncompletedTasks.length; i += 1) {
+        uncompletedTasks[i].index = i + 1;
+      }
+      localStorage.setItem('todoItems', JSON.stringify(todoItems));
+      display();
+    };
+
+    btnDeleteAll.addEventListener('click', clearAllCompleted);
 
     // Add an event listener for the deleteoption
     deleteoption.addEventListener('click', () => {
